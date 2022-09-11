@@ -1,0 +1,27 @@
+{
+  "name": "canal-service-backend",
+  "version": "1.0.0",
+  "description": "backend for pet project of canal - service",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "dev": "nodemon --experimental-json-modules index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/MagamedRus/canal-service-backend.git"
+  },
+  "author": "Muhammad K. (muhammadkasymov@yandex.ru)",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/MagamedRus/canal-service-backend/issues"
+  },
+  "homepage": "https://github.com/MagamedRus/canal-service-backend#readme",
+  "dependencies": {
+    "axios": "^0.27.2",
+    "cors": "^2.8.5",
+    "express": "^4.18.1",
+    "morgan": "^1.10.0",
+    "nodemon": "^2.0.19"
+  }
+}
