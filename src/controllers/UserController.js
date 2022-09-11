@@ -1,6 +1,6 @@
 import axios from "axios";
 import { JSON_PLACEHOLDER_URL, ROUTE_USERS } from "../constants/server.js";
-import usersData from "../db/users.json";
+import users from "../db/users.js";
 
 class UserController {
   async #getUserData(userId) {
@@ -41,7 +41,7 @@ class UserController {
       if (!login || !password) {
         res.status(400).json({ message: "login and password are required!" });
       } else {
-        let [user] = usersData.users?.filter((el) => el.login === login);
+        let [user] = users?.filter((el) => el.login === login);
         if (!user || user.password !== password) {
           res.status(401).json({ message: "Bad auth" });
         } else {
