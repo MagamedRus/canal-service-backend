@@ -3,6 +3,7 @@ import {
   JSON_PLACEHOLDER_URL,
   ROUTE_POSTS,
   ROUTE_USERS,
+  ROUTE_PHOTOS,
 } from "../constants/server.js";
 
 class PostController {
@@ -13,6 +14,15 @@ class PostController {
       .then((res) => {
         result = res.data;
       });
+
+    return result;
+  }
+
+  async #getImages() {
+    let result = null;
+    await axios.get(`${JSON_PLACEHOLDER_URL}${ROUTE_PHOTOS}`).then((res) => {
+      result = res.data.map((el) => el.thumbnailUrl);
+    });
 
     return result;
   }
@@ -30,10 +40,12 @@ class PostController {
 
   async #getFinishedPosts(posts, userId) {
     const userData = await this.#getUserData(userId);
-    const finishedPosts = posts.map((post) => ({
+    const photos = await this.#getImages();
+    const finishedPosts = posts.map((post, index) => ({
       ...post,
       author: userData.name,
       company: userData.company?.name,
+      img: photos[index],
     }));
 
     return finishedPosts;
@@ -47,7 +59,6 @@ class PostController {
         res.status(400).json({ message: "userId is required!" });
       } else {
         let posts = await this.#getPostData(userId);
-        console.log(posts);
         if (!posts[0]) {
           res.status(500).json({ message: "User data is not found!" });
         } else {
