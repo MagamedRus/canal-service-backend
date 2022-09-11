@@ -23,7 +23,7 @@ class UserController {
       } else {
         let [user] = usersData.users?.filter((el) => el.login === login);
         if (!user || user.password !== password) {
-          res.status(404).json({ message: "Bad auth" });
+          res.status(401).json({ message: "Bad auth" });
         } else {
           const userData = await this.#getUserData(user.id);
           if (!userData?.id) {
